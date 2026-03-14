@@ -1,0 +1,24 @@
+diff --git a/src/maintainerflow/review.py b/src/maintainerflow/review.py
+index 1234567..89abcde 100644
+--- a/src/maintainerflow/review.py
++++ b/src/maintainerflow/review.py
+@@ -12,6 +12,11 @@ def review_pr(payload: PRReviewInput) -> PRReviewResult:
+-    if any(".github/workflows" in p for p in paths):
++    if any(path.startswith(".github/workflows/") for path in paths):
+         risk_points.append("CI workflow changes can impact release safety.")
+         manual_areas.append("Validate workflow permissions and trigger scope.")
++
++    if any("security" in path.lower() or "auth" in path.lower() for path in paths):
++        risk_points.append("Security-sensitive files changed.")
++        manual_areas.append("Perform focused security review.")
++
+ diff --git a/.github/workflows/release.yml b/.github/workflows/release.yml
+index 13579bd..86420ca 100644
+--- a/.github/workflows/release.yml
++++ b/.github/workflows/release.yml
+@@ -8,6 +8,7 @@ jobs:
+ permissions:
+   contents: read
++  id-token: write
+ run:
+   shell: bash
