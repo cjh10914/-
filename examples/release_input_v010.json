@@ -1,0 +1,25 @@
+{
+  "version": "v0.1.0",
+  "items": [
+    {
+      "title": "feat(cli): add --out-file option for all commands",
+      "labels": ["feature", "cli"],
+      "commit_message": "feat(cli): support writing output to files"
+    },
+    {
+      "title": "fix(review): flag workflow diffs as CI risk",
+      "labels": ["fix"],
+      "commit_message": "fix: broaden workflow risk detection"
+    },
+    {
+      "title": "docs(readme): add step-by-step GitHub Action guide",
+      "labels": ["docs"],
+      "commit_message": "docs: expand action documentation"
+    },
+    {
+      "title": "chore: normalize test fixtures",
+      "labels": ["chore"],
+      "commit_message": "chore: refresh examples"
+    }
+  ]
+}
