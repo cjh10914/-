@@ -21,50 +21,42 @@ community include:
 - Being respectful of differing opinions, viewpoints, and experiences
 - Giving and gracefully accepting constructive feedback
 - Accepting responsibility and apologizing to those affected by our mistakes,
-and learning from the experience
+  and learning from the experience
 - Focusing on what is best not just for us as individuals, but for the
-overall community
+  overall community
 
 Examples of unacceptable behavior include:
 
-- The use of sexualized language or imagery, and sexual attention or
-advances of any kind
+- The use of sexualized language or imagery, and sexual attention or advances of any kind
 - Trolling, insulting or derogatory comments, and personal or political attacks
 - Public or private harassment
-- Publishing others' private information, such as a physical or email
-address, without their explicit permission
+- Publishing others' private information, such as a physical or email address,
+  without their explicit permission
 - Other conduct which could reasonably be considered inappropriate in a
-professional setting
+  professional setting
 
 ## Enforcement Responsibilities
 
-Community leaders are responsible for clarifying and enforcing our standards of
-acceptable behavior and will take appropriate and fair corrective action in
-response to any behavior that they deem inappropriate, threatening, offensive,
+Community maintainers are responsible for clarifying and enforcing our standards
+of acceptable behavior and will take appropriate and fair corrective action in
+response to behavior that they deem inappropriate, threatening, offensive,
 or harmful.
-
-Community leaders have the right and responsibility to remove, edit, or reject
-comments, commits, code, wiki edits, issues, and other contributions that are
-not aligned to this Code of Conduct, and will communicate reasons for moderation
-decisions when appropriate.
 
 ## Scope
 
 This Code of Conduct applies within all community spaces, and also applies when
 an individual is officially representing the community in public spaces.
-Examples of representing our community include using an official email address,
-posting via an official social media account, or acting as an appointed
-representative at an online or offline event.
 
-## Enforcement
+## Reporting and Enforcement
 
-Instances of abusive, harassing, or otherwise unacceptable behavior may be
-reported to the project maintainers by opening a private security advisory or by
-contacting maintainers through repository support channels. All complaints will
-be reviewed and investigated promptly and fairly.
+If you experience or witness unacceptable behavior:
 
-All community leaders are obligated to respect the privacy and security of the
-reporter of any incident.
+1. Open a private maintainer contact request using guidance in `SUPPORT.md`.
+2. For severe or sensitive cases, use the private reporting path in `SECURITY.md`.
+3. Include links/screenshots/context so maintainers can investigate fairly.
+
+All reports will be reviewed promptly and, where possible, acknowledged within 7
+calendar days. Maintainers will respect reporter privacy to the extent possible.
 
 ## Attribution
 

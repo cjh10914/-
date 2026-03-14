@@ -5,6 +5,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.0] - 2026-03-14
+
+### Added
+- Added `docs/application-summary.md` for OSS support-program/application use.
+- Added `docs/release-v0.2.0.md` with a publish-ready release draft.
+- Expanded documentation examples with clearer, non-technical explanations.
+
+### Changed
+- README rewritten for clearer maintainer value proposition, audience fit, limitations, and a human-judgment comparison table.
+- CONTRIBUTING strengthened with fixture conventions, review expectations, and a deterministic rule/template proposal flow.
+- CLI markdown output for triage and PR review now includes clearer "Suggested Next Steps" sections.
+- Refactored issue input parsing into `io_utils.py` to keep parsing logic centralized.
+- Updated release checklist and support/security docs for ongoing OSS maintenance.
+
+### Limitations
+- Core behavior remains deterministic and heuristic-driven; maintainers must review outputs before acting.
+
 ## [0.1.1] - 2026-03-14
 
 ### Added

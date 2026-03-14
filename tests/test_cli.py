@@ -24,6 +24,17 @@ def test_cli_triage_issue_markdown(tmp_path) -> None:
     assert "# Issue Triage" in result.stdout
 
 
+def test_cli_triage_issue_marks_no_missing_info(tmp_path) -> None:
+    issue_md = tmp_path / "issue.md"
+    issue_md.write_text(
+        "# bug: crash\nsteps to reproduce\nexpected behavior\nactual behavior\npython 3.11\nstack trace",
+        encoding="utf-8",
+    )
+    result = runner.invoke(app, ["triage-issue", str(issue_md)])
+    assert result.exit_code == 0
+    assert "None detected by heuristic checks." in result.stdout
+
+
 def test_cli_triage_issue_invalid_json(tmp_path) -> None:
     issue_file = tmp_path / "issue.json"
     issue_file.write_text('{"title":"bad"', encoding="utf-8")
@@ -39,6 +50,14 @@ def test_cli_review_pr_json(tmp_path) -> None:
     assert result.exit_code == 0
     payload = json.loads(result.stdout)
     assert "risk_level" in payload
+
+
+def test_cli_review_pr_includes_next_steps(tmp_path) -> None:
+    diff = tmp_path / "change.diff"
+    diff.write_text("diff --git a/src/x.py b/src/x.py\n--- a/src/x.py\n+++ b/src/x.py\n+print(1)\n", encoding="utf-8")
+    result = runner.invoke(app, ["review-pr", str(diff)])
+    assert result.exit_code == 0
+    assert "## Suggested Next Steps" in result.stdout
 
 
 def test_cli_generate_release_notes_markdown(tmp_path) -> None:
@@ -77,4 +96,4 @@ def test_cli_reply_template_json() -> None:
 def test_cli_help_contains_assistive_language() -> None:
     result = runner.invoke(app, ["--help"])
     assert result.exit_code == 0
-    assert "assistive" in result.stdout.lower()
+    assert "human maintainer" in result.stdout.lower()

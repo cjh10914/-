@@ -1,6 +1,14 @@
-# Example Output: Maintainer Reply Template
+# Example Output: Reply Template
 
-_Command:_ `maintainerflow reply-template missing-tests`
+**Scenario:** A PR changes behavior but has no test coverage.
+
+**Command used**
+
+```bash
+maintainerflow reply-template missing-tests
+```
+
+**Output (markdown)**
 
 ```markdown
 # Reply Template: missing-tests
@@ -8,7 +16,7 @@ _Command:_ `maintainerflow reply-template missing-tests`
 Thanks for the PR. Please add tests (or explain why tests are not feasible) so maintainers can safely verify behavior changes.
 ```
 
-### What this means (plain language)
+## Plain-language takeaway
 
-- Maintainers get a respectful, reusable message for common review situations.
-- Template wording is concise and encourages actionable follow-up.
+Templates save maintainer time and keep requests consistent. Maintainers can
+edit tone/context before posting.

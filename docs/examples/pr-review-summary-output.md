@@ -1,10 +1,18 @@
 # Example Output: PR Review Summary
 
-_Input file:_ `examples/pr_webhook_hardening.diff`
+**Scenario:** A PR changes source code but does not include tests or docs updates.
+
+**Command used**
+
+```bash
+maintainerflow review-pr examples/pr_webhook_hardening.diff
+```
+
+**Output (markdown)**
 
 ```markdown
 # PR Review Summary
-- **Summary:** PR changes 2 file(s) with +8/-1 lines.
+- **Summary:** PR changes 2 file(s) with +18/-2 lines.
 - **Risk level:** medium
 
 ## Risk Analysis
@@ -16,13 +24,18 @@ _Input file:_ `examples/pr_webhook_hardening.diff`
 
 ## Potentially Missing Items
 - Tests may be missing for source changes.
+- Documentation updates may be needed.
 
 ## Suggested Review Comments
 - Can we add or reference tests that cover the new behavior?
+- Please confirm whether README/docs should be updated.
+
+## Suggested Next Steps
+- Review highlighted risk and manual-review areas before approval.
+- Request missing tests/docs or explicit rationale from the author.
 ```
 
-### What this means (plain language)
+## Plain-language takeaway
 
-- The PR is not labeled high risk, but it touches workflow automation and should be reviewed carefully.
-- Maintainers are reminded to check test coverage for logic changes.
-- Suggested review comments are intentionally short and reusable.
+MaintainerFlow gives maintainers a structured starting point for review. It does
+not decide whether the PR should be merged.

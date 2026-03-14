@@ -1,28 +1,36 @@
 # Example Output: Release Notes
 
-_Input file:_ `examples/release_input_v010.json`
+**Scenario:** Prepare a release draft from merged PR metadata.
+
+**Command used**
+
+```bash
+maintainerflow generate-release-notes examples/release_input_v010.json
+```
+
+**Output (markdown)**
 
 ```markdown
 # Release v0.1.0
 
 ## Highlights
-- Introduces 1 new feature(s).
-- Includes 1 bug fix(es).
+- Introduces 2 new feature(s).
+- Includes 3 bug fix(es).
 
 ## Features
-- feat(cli): add --out-file option for all commands
+- feat: add issue triage command
+- feat: add release notes generator
 
 ## Fixes
-- fix(review): flag workflow diffs as CI risk
+- fix: handle empty issue body
+- fix: avoid duplicate labels in triage output
+- fix: improve diff parsing for deleted files
 
 ## Docs
-- docs(readme): add step-by-step GitHub Action guide
-
-## Chores
-- chore: normalize test fixtures
+- docs: clarify workflow setup
 ```
 
-### What this means (plain language)
+## Plain-language takeaway
 
-- Highlights summarize the release in two lines for maintainers and users.
-- Detailed sections still keep changelog-style structure for transparency.
+This provides a draft release note structure quickly. Maintainers should still
+edit wording, add upgrade guidance, and confirm accuracy before publishing.

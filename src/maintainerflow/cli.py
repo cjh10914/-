@@ -7,7 +7,7 @@ from typing import Any
 import typer
 from pydantic import ValidationError
 
-from maintainerflow.io_utils import dump_json, load_json, load_text
+from maintainerflow.io_utils import dump_json, load_json, load_text, parse_issue_input
 from maintainerflow.models import IssueInput, OutputFormat, PRReviewInput, ReleaseInput, ReplyTemplate
 from maintainerflow.release_notes import generate_release_notes
 from maintainerflow.review import review_pr
@@ -17,7 +17,7 @@ from maintainerflow.triage import triage_issue
 app = typer.Typer(
     help=(
         "MaintainerFlow: deterministic maintainer assistant for OSS repositories. "
-        "The tool is assistive and does not replace human review."
+        "Use it for first-pass triage/review drafts, then keep a human maintainer in the loop."
     ),
     no_args_is_help=True,
 )
@@ -37,38 +37,34 @@ def _write_result(text: str, out_file: Path | None) -> None:
     typer.echo(f"Wrote output to {out_file}")
 
 
-def _parse_issue_file(path: Path) -> IssueInput:
-    if path.suffix.lower() == ".json":
-        payload = load_json(path)
-        return IssueInput.model_validate(payload)
-
-    text = load_text(path)
-    if text.startswith("#"):
-        lines = text.splitlines()
-        title = lines[0].lstrip("# ").strip()
-        body = "\n".join(lines[1:]).strip()
-        return IssueInput(title=title or "Untitled issue", body=body)
-
-    return IssueInput(title=path.stem.replace("_", " "), body=text)
-
-
 def _common_output_option() -> OutputFormat:
-    return typer.Option(OutputFormat.MARKDOWN, "--output", "-o", help="Output format: markdown or json.")
+    return typer.Option(
+        OutputFormat.MARKDOWN,
+        "--output",
+        "-o",
+        help="Output format (markdown for humans, json for automation).",
+    )
 
 
 def _common_out_file_option() -> Path | None:
-    return typer.Option(None, "--out-file", "-f", help="Optional output file path.")
+    return typer.Option(None, "--out-file", "-f", help="Write output to a file instead of stdout.")
+
+
+def _render_next_steps(items: list[str]) -> list[str]:
+    if not items:
+        return []
+    return ["", "## Suggested Next Steps", *[f"- {item}" for item in items]]
 
 
 @app.command("triage-issue")
 def triage_issue_cmd(
-    file: Path = typer.Argument(..., exists=True, readable=True, help="Path to issue input (.json or .md)."),
+    file: Path = typer.Argument(..., exists=True, readable=True, help="Issue input file (.json or .md)."),
     output: OutputFormat = _common_output_option(),
     out_file: Path | None = _common_out_file_option(),
 ) -> None:
-    """Classify an issue, detect missing details, and draft a maintainer reply."""
+    """Classify an issue, identify missing context, and draft a maintainer reply."""
     try:
-        issue = _parse_issue_file(file)
+        issue: IssueInput = parse_issue_input(file)
     except (json.JSONDecodeError, ValidationError) as exc:
         raise typer.BadParameter(f"Invalid issue input: {exc}") from exc
 
@@ -77,17 +73,26 @@ def triage_issue_cmd(
         _write_result(_emit(result.model_dump(), output), out_file)
         return
 
+    missing = result.missing_information or ["None detected by heuristic checks."]
+    next_steps: list[str] = []
+    if result.missing_information:
+        next_steps.append("Ask reporter to update the issue with missing details.")
+    else:
+        next_steps.append("Move to maintainer review or prioritization.")
+    if result.redirect_suggestion:
+        next_steps.append("Decide whether to redirect this thread to Discussions/docs.")
+
     lines = [
         "# Issue Triage",
         f"- **Type:** {result.issue_type.value}",
         f"- **Confidence:** {result.confidence:.2f}",
-        f"- **Labels:** {', '.join(result.suggested_labels)}",
+        f"- **Suggested labels:** {', '.join(result.suggested_labels)}",
+        "- **Missing information:**",
+        *[f"  - {item}" for item in missing],
     ]
-    if result.missing_information:
-        lines.append("- **Missing information:**")
-        lines.extend([f"  - {item}" for item in result.missing_information])
     if result.redirect_suggestion:
         lines.append(f"- **Redirect suggestion:** {result.redirect_suggestion}")
+    lines.extend(_render_next_steps(next_steps))
     lines.extend(["", "## Suggested Maintainer Reply", result.suggested_response])
     _write_result("\n".join(lines), out_file)
 
@@ -98,13 +103,17 @@ def review_pr_cmd(
     output: OutputFormat = _common_output_option(),
     out_file: Path | None = _common_out_file_option(),
 ) -> None:
-    """Summarize pull request risk and review hotspots from a unified diff."""
+    """Summarize PR impact, risk signals, and human review priorities."""
     diff = load_text(diff_file)
     result = review_pr(PRReviewInput(diff_text=diff))
 
     if output == OutputFormat.JSON:
         _write_result(_emit(result.model_dump(), output), out_file)
         return
+
+    next_steps: list[str] = ["Review highlighted risk and manual-review areas before approval."]
+    if result.missing_items:
+        next_steps.append("Request missing tests/docs or explicit rationale from the author.")
 
     lines = [
         "# PR Review Summary",
@@ -120,6 +129,7 @@ def review_pr_cmd(
     if result.missing_items:
         lines.extend(["", "## Potentially Missing Items", *[f"- {item}" for item in result.missing_items]])
     lines.extend(["", "## Suggested Review Comments", *[f"- {item}" for item in result.suggested_comments]])
+    lines.extend(_render_next_steps(next_steps))
     _write_result("\n".join(lines), out_file)
 
 

@@ -1,25 +1,30 @@
 # Security Policy
 
-## Supported Versions
+## Supported versions
 
-MaintainerFlow is currently in early-stage development. Security fixes are
-applied to the latest `0.1.x` release line.
+MaintainerFlow is actively maintained on the latest `0.2.x` line.
+Security fixes are targeted to the most recent release first.
 
-## Reporting a Vulnerability
+## Reporting a vulnerability
 
-Please do **not** open public issues for suspected vulnerabilities.
+Please **do not** open a public issue for suspected vulnerabilities.
 
-Instead, report privately via GitHub Security Advisories:
+Preferred path:
 
-1. Go to the repository's **Security** tab.
-2. Click **Report a vulnerability**.
-3. Include reproduction steps, affected files/commands, and expected impact.
+1. Open a private report via GitHub Security Advisories.
+2. Include reproduction steps, affected files/commands, and expected impact.
+3. If available, include a minimal patch suggestion.
 
-If Security Advisories are unavailable, use the support channel in `SUPPORT.md`
-and clearly mark the report as **security-sensitive**.
+Fallback path (if advisories are unavailable): use the private/security route
+noted in `SUPPORT.md` and clearly mark the report as **security-sensitive**.
 
 ## Response expectations
 
-- Initial triage acknowledgement target: within 7 days.
-- Confirmed issues receive a mitigation plan and release target when possible.
-- We may ask reporters to validate fixes before public disclosure.
+- Initial acknowledgement target: within 7 days.
+- We will triage severity and propose a mitigation path when confirmed.
+- We may ask reporters to validate a fix before public disclosure.
+
+## Scope note
+
+MaintainerFlow is an assistive maintainer tool. It does not replace security
+review or provide security guarantees for downstream repositories.

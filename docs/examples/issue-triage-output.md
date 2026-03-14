@@ -1,19 +1,37 @@
 # Example Output: Issue Triage
 
-_Input file:_ `examples/issue_bug_report_realistic.md`
+**Scenario:** A contributor reports a crash but forgets environment details and logs.
+
+**Command used**
+
+```bash
+maintainerflow triage-issue examples/issue_bug_missing.md
+```
+
+**Output (markdown)**
 
 ```markdown
 # Issue Triage
 - **Type:** bug
 - **Confidence:** 0.65
-- **Labels:** bug, needs-triage
+- **Suggested labels:** bug, needs-reproduction, needs-triage
+- **Missing information:**
+  - environment details
+  - logs or stack trace
+
+## Suggested Next Steps
+- Ask reporter to update the issue with missing details.
+- Move to maintainer review once required details are provided.
 
 ## Suggested Maintainer Reply
-Thanks for the detailed report. A maintainer will review this soon. Please note this tool is assistive and does not replace human review.
+Thanks for opening this. To help maintainers act quickly, please update this issue with:
+- environment details
+- logs or stack trace
+
+Once added, we can continue triage.
 ```
 
-### What this means (plain language)
+## Plain-language takeaway
 
-- The issue is classified as a **bug**.
-- The report already includes key bug details (steps, expected/actual behavior, environment, logs), so no extra information is requested.
-- Maintainers get a ready-to-post first reply.
+MaintainerFlow does not close the issue automatically. It highlights gaps and
+prepares a clear maintainer response so the next maintainer action is obvious.
