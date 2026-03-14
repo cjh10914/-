@@ -1,0 +1,4 @@
+{
+  "title": "Feature request: add CSV export",
+  "body": "We have a use case for exporting triage reports to CSV. Expected outcome is easier reporting. Alternatives considered: custom script."
+}
