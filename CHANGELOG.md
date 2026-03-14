@@ -5,6 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.1] - 2026-03-14
+
+### Added
+- Community governance and support docs: `CODE_OF_CONDUCT.md`, `SECURITY.md`, and `SUPPORT.md`.
+- GitHub collaboration templates: issue templates for bug/feature/question and a pull request template.
+- Human-readable output walkthroughs in `docs/examples/` for issue triage, PR review summary, release notes, and reply templates.
+- Release-readiness documentation: `docs/release-checklist.md` and `docs/release-v0.1.1.md`.
+
+### Changed
+- README positioning and front matter updated with badges, project status, clearer value proposition, and audience fit/non-fit guidance.
+- CONTRIBUTING workflow simplified with local setup, test/run checks, and review checklist language.
+- Version bumped from `0.1.0` to `0.1.1` for a non-breaking credibility/documentation patch release.
+
+### Limitations
+- Core behavior remains deterministic and heuristic-driven; maintainers must review outputs before acting.
+
 ## [0.1.0] - 2026-03-14
 
 ### Added

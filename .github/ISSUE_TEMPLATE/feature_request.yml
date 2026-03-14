@@ -1,0 +1,30 @@
+name: Feature request
+description: Suggest an improvement to maintainer workflows.
+title: "feat: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please keep requests concrete and maintainable.
+  - type: textarea
+    id: problem
+    attributes:
+      label: Maintainer problem to solve
+      description: What repetitive maintainer pain does this address?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed behavior
+      description: Describe CLI UX, output shape, and constraints.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Include workarounds or why existing features are insufficient.
+    validations:
+      required: false

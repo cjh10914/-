@@ -1,8 +1,16 @@
 # MaintainerFlow
 
-MaintainerFlow is a GitHub-native, open-source assistant that helps OSS maintainers cut repetitive workflow overhead without automating away judgment.
+![Python 3.11+](https://img.shields.io/badge/python-3.11%2B-blue.svg)
+![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)
+![Status: Early stage](https://img.shields.io/badge/status-early--stage-orange.svg)
 
-> **Positioning:** MaintainerFlow is assistive triage/review tooling. It is not an autonomous reviewer and does not replace maintainer decisions.
+Deterministic, GitHub-native maintainer assistance for open-source repositories.
+
+> **Quick value:** MaintainerFlow helps maintainers triage issues, summarize PR risk, draft release notes, and reuse common replies in minutes—without pretending to replace human review.
+
+## Project status
+
+MaintainerFlow is **early-stage (v0.1.x)** and actively maintained. The project is stable enough for demos and small-team workflows, with explicit limitations documented below.
 
 ## Why this exists
 
@@ -13,7 +21,19 @@ Maintainers repeatedly do high-context but repetitive work:
 - collecting release notes,
 - and posting similar reply templates.
 
-MaintainerFlow gives deterministic, transparent outputs for those jobs so maintainers can spend more time on final decisions.
+MaintainerFlow provides deterministic, transparent outputs so maintainers can spend more time on final decisions.
+
+## Who this is for / not for
+
+### This is for
+- OSS maintainers who want faster first-pass triage and review prep.
+- Projects that prefer deterministic heuristics over opaque automation.
+- Repositories that want lightweight CLI + GitHub Actions integration.
+
+### This is not for
+- Teams expecting autonomous merge decisions.
+- Security scanning or compliance enforcement use cases.
+- AI-first workflows requiring external API calls for core behavior.
 
 ## MVP features
 
@@ -46,6 +66,8 @@ python -m pip install maintainerflow
 ### Local development
 
 ```bash
+python -m venv .venv
+source .venv/bin/activate
 python -m pip install -e .[dev]
 pytest
 ```
@@ -58,6 +80,17 @@ maintainerflow review-pr examples/pr_webhook_hardening.diff
 maintainerflow generate-release-notes examples/release_input_v010.json
 maintainerflow reply-template missing-tests
 ```
+
+## Realistic example outputs
+
+Want to review outputs before installing?
+
+- [Issue triage output](docs/examples/issue-triage-output.md)
+- [PR review summary output](docs/examples/pr-review-summary-output.md)
+- [Release notes output](docs/examples/release-notes-output.md)
+- [Reply template output](docs/examples/reply-template-output.md)
+
+These examples are written for non-technical reviewers and maintainers evaluating workflow fit.
 
 ## CLI
 
@@ -123,17 +156,9 @@ The repository includes `.github/workflows/demo-maintainerflow.yml`.
 
 Security note: keep workflow permissions minimal and review any automated commenting before enabling in production repositories.
 
-## Publishability checklist highlights
-
-- `src/` layout with typed modules.
-- deterministic rule-based engine (no external LLM/API dependency in core flow).
-- CLI + GitHub Actions example.
-- test suite with unit + CLI coverage.
-- contributor docs (`CONTRIBUTING.md`, `AGENTS.md`, `ROADMAP.md`, `CHANGELOG.md`).
-
 ## Limitations (important)
 
-MaintainerFlow intentionally has strict limits in v0.1.0:
+MaintainerFlow intentionally has strict limits in v0.1.1:
 
 - Heuristic keyword/diff analysis only (no semantic code understanding).
 - Can produce false positives/negatives on labels, risk, and missing information.
@@ -145,6 +170,8 @@ MaintainerFlow intentionally has strict limits in v0.1.0:
 
 - [CHANGELOG.md](CHANGELOG.md)
 - [CONTRIBUTING.md](CONTRIBUTING.md)
+- [SUPPORT.md](SUPPORT.md)
+- [SECURITY.md](SECURITY.md)
 - [ROADMAP.md](ROADMAP.md)
 - [AGENTS.md](AGENTS.md)
 
