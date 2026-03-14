@@ -1,0 +1,20 @@
+{
+  "version": "v0.1.0",
+  "items": [
+    {
+      "title": "feat: add issue triage command",
+      "labels": ["feature"],
+      "commit_message": "feat(cli): add triage command"
+    },
+    {
+      "title": "fix: improve diff parser for review summaries",
+      "labels": ["fix"],
+      "commit_message": "fix(review): better file extraction"
+    },
+    {
+      "title": "docs: add quickstart section",
+      "labels": ["docs"],
+      "commit_message": "docs(readme): quickstart"
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+name: Bug report
+description: Report incorrect MaintainerFlow behavior or output.
+title: "bug: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting a bug. Please provide enough detail for deterministic reproduction.
+  - type: input
+    id: command
+    attributes:
+      label: Command run
+      placeholder: maintainerflow triage-issue examples/issue_bug_report_realistic.md
+    validations:
+      required: true
+  - type: textarea
+    id: input_data
+    attributes:
+      label: Input used
+      description: Paste the issue JSON/markdown, diff snippet, or release metadata used.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      placeholder: Python 3.11, Ubuntu 22.04
+    validations:
+      required: true

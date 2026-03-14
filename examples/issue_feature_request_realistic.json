@@ -1,0 +1,4 @@
+{
+  "title": "Feature request: add `--strict` mode for triage completeness",
+  "body": "## Problem\nNew maintainers are unsure when an issue has enough details to proceed.\n\n## Use case\nWhen triaging weekly backlog, we want a stricter threshold so incomplete bug reports are consistently labeled.\n\n## Expected outcome\nA `--strict` option that marks bug reports as incomplete unless repro, expected/actual, env, and logs are all present.\n\n## Alternatives considered\n- Contributor handbook checklist only\n- Manual reviewer notes in issue comments\n\n## Non-goals\nNo automatic issue closing."
+}
