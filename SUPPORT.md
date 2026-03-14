@@ -19,3 +19,13 @@ To get useful support quickly, include:
 
 MaintainerFlow is an assistive maintainer tool. It does not provide autonomous
 code review or security guarantees.
+
+## Common Git/GitHub workflow help
+
+If your pull request shows **"This branch has conflicts"** or you cannot pull
+cleanly, use this guide:
+
+- [`docs/git-conflict-recovery.md`](docs/git-conflict-recovery.md)
+
+The guide is written for non-specialists and includes both GitHub web UI and
+copy/paste local Git steps.
